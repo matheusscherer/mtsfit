@@ -1,0 +1,396 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Scherer Method — Diagnóstico de Performance</title>
+    <meta
+      name="description"
+      content="Pare de treinar no escuro. Diagnóstico de performance: gargalo no papel, um próximo passo. Sem enrolação."
+    />
+    <meta name="theme-color" content="#070707" />
+    <meta property="og:title" content="Scherer Method — Diagnóstico de Performance" />
+    <meta
+      property="og:description"
+      content="Gargalo no papel. Um próximo passo. Sem enrolação."
+    />
+    <meta property="og:image" content="https://cdn.jsdelivr.net/gh/matheusscherer/mtsfit@main/public/og.jpg" />
+    <meta property="og:type" content="website" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800;900&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #070707;
+        --surface: #111111;
+        --fg: #f3f3ee;
+        --muted: #8c8c84;
+        --faint: #5c5c56;
+        --accent: #ccff00;
+        --accent-fg: #0a0a0a;
+        --border: #242424;
+        --display: "Barlow Condensed", "Arial Narrow", sans-serif;
+        --sans: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+        --mono: "IBM Plex Mono", ui-monospace, monospace;
+      }
+      * { box-sizing: border-box; }
+      html { scroll-behavior: smooth; color-scheme: dark; }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--fg);
+        font-family: var(--sans);
+        line-height: 1.5;
+        -webkit-font-smoothing: antialiased;
+      }
+      ::selection { background: var(--accent); color: var(--accent-fg); }
+      img { display: block; max-width: 100%; outline: 1px solid rgb(255 255 255 / 0.1); outline-offset: -1px; }
+      a { color: inherit; text-decoration: none; }
+      .wrap { max-width: 72rem; margin: 0 auto; padding: 0 1.25rem; }
+      .kicker {
+        font-family: var(--mono);
+        font-size: 0.75rem;
+        letter-spacing: 0.28em;
+        text-transform: uppercase;
+        color: var(--accent);
+      }
+      .display {
+        font-family: var(--display);
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: -0.03em;
+        line-height: 0.9;
+        text-wrap: balance;
+      }
+      header {
+        position: sticky; top: 0; z-index: 50;
+        border-bottom: 1px solid var(--border);
+        background: rgb(7 7 7 / 0.85);
+        backdrop-filter: blur(12px);
+      }
+      .header-row {
+        max-width: 72rem; margin: 0 auto; padding: 0 1.25rem;
+        height: 4rem; display: flex; align-items: center; justify-content: space-between;
+      }
+      .logo { font-family: var(--display); font-size: 1.25rem; font-weight: 800; letter-spacing: 0.08em; }
+      nav { display: none; gap: 1.75rem; }
+      nav a {
+        font-size: 0.75rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.16em; color: var(--muted);
+      }
+      nav a:hover { color: var(--fg); }
+      .btn {
+        display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+        font-family: var(--display); font-weight: 700; text-transform: uppercase; letter-spacing: 0.14em;
+        border: 0; cursor: pointer; text-decoration: none;
+      }
+      .btn-primary { background: var(--accent); color: var(--accent-fg); }
+      .btn-primary:hover { background: var(--fg); }
+      .btn-ghost { background: transparent; color: var(--fg); border: 1px solid var(--border); }
+      .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+      .btn-lg { height: 3rem; padding: 0 1.5rem; font-size: 0.875rem; }
+      .btn-sm { height: 2.25rem; padding: 0 0.75rem; font-size: 0.75rem; }
+      .rule { border: 0; border-bottom: 1px solid var(--border); }
+      .hero {
+        display: grid; gap: 2.5rem; padding: 4rem 0; align-items: end;
+      }
+      h1 { font-size: clamp(3.4rem, 6vw + 1.4rem, 7.4rem); margin: 1.25rem 0 0; }
+      .lede { max-width: 28rem; color: var(--muted); margin: 1.5rem 0 0; }
+      .cta { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 2rem; }
+      .frame { width: 14rem; border: 1px solid var(--border); background: var(--surface); justify-self: end; }
+      .frame img { width: 100%; aspect-ratio: 4/5; object-fit: cover; object-position: center 20%; filter: grayscale(1); }
+      .frame figcaption { border-top: 1px solid var(--border); padding: 0.65rem 0.75rem; }
+      .frame p { margin: 0; font-family: var(--mono); font-size: 0.6875rem; text-transform: uppercase; letter-spacing: 0.14em; }
+      .stats { display: grid; grid-template-columns: 1fr 1fr; }
+      .stat { padding: 2rem 1.25rem; border-bottom: 1px solid var(--border); }
+      .stat strong {
+        display: block; font-family: var(--display); font-size: 3rem; font-weight: 800;
+        color: var(--accent); letter-spacing: -0.03em; line-height: 1;
+      }
+      .stat span { display: block; margin-top: 0.5rem; font-family: var(--mono); font-size: 0.6875rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); }
+      .section { padding: 5rem 0; }
+      h2 { font-size: clamp(3rem, 1.6rem + 5vw, 4.5rem); margin: 1rem 0 0; }
+      .flow { display: grid; gap: 0.75rem; margin-top: 3rem; }
+      .card { border: 1px solid var(--border); background: var(--surface); padding: 1.5rem; }
+      .card h3 { font-size: 1.85rem; margin: 1.5rem 0 0; }
+      .card p { color: var(--muted); font-size: 0.875rem; margin: 0.75rem 0 0; }
+      .blocks { display: grid; gap: 0.75rem; margin-top: 3rem; }
+      .block {
+        min-height: 16rem; display: flex; flex-direction: column;
+        border: 1px solid var(--border); background: var(--surface); padding: 1.5rem;
+      }
+      .block:hover { border-color: var(--accent); box-shadow: 0 0 0 1px #ccff0066; }
+      .block-top { display: flex; justify-content: space-between; font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.2em; color: var(--accent); }
+      .block h3 { font-size: clamp(2.6rem, 4vw + 1.2rem, 4.4rem); margin: 2rem 0 0; }
+      .block .detail { color: var(--muted); font-size: 0.875rem; margin: 0.5rem 0 0; }
+      .meta {
+        margin-top: auto; padding-top: 1rem; border-top: 1px solid var(--border);
+        display: grid; grid-template-columns: auto 1fr; gap: 0.5rem 1.5rem;
+        font-family: var(--mono); font-size: 0.6875rem; text-transform: uppercase; letter-spacing: 0.16em;
+      }
+      .meta dt { color: var(--faint); }
+      .meta dd { margin: 0; text-align: right; }
+      table { width: 100%; border-collapse: collapse; text-align: left; font-size: 0.875rem; }
+      th {
+        font-family: var(--mono); font-size: 0.6875rem; font-weight: 500;
+        letter-spacing: 0.18em; text-transform: uppercase; color: var(--faint);
+        padding: 0.75rem 1.25rem; border-bottom: 1px solid var(--border);
+      }
+      td { padding: 0.9rem 1.25rem; border-bottom: 1px solid var(--border); }
+      tr:last-child td { border-bottom: 0; }
+      .split { display: grid; }
+      .split > div { padding: 4rem 1.25rem; }
+      .list { list-style: none; padding: 0; margin: 2rem 0 0; }
+      .list li {
+        font-family: var(--display); font-size: 1.5rem; font-weight: 700;
+        text-transform: uppercase; letter-spacing: -0.02em; line-height: 1.15;
+        padding-bottom: 1.25rem; margin-bottom: 1.25rem; border-bottom: 1px solid var(--border);
+      }
+      .list li:last-child { border: 0; margin: 0; padding: 0; }
+      .coach { display: grid; gap: 2.5rem; align-items: center; padding: 5rem 0; }
+      .coach img { width: 10rem; aspect-ratio: 1; object-fit: cover; object-position: top; filter: grayscale(1); }
+      form { display: grid; gap: 1rem; }
+      label span { display: block; font-family: var(--mono); font-size: 0.6875rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.4rem; }
+      input, select {
+        height: 3rem; width: 100%; border: 1px solid var(--border); background: var(--bg);
+        color: var(--fg); padding: 0 0.75rem; font: 0.875rem var(--sans); outline: none;
+      }
+      input:focus, select:focus { border-color: var(--accent); }
+      .ok { border: 1px solid var(--accent); background: var(--surface); padding: 2.5rem 1.5rem; }
+      footer { border-top: 1px solid var(--border); }
+      .footer-row {
+        max-width: 72rem; margin: 0 auto; padding: 2.5rem 1.25rem;
+        display: flex; flex-direction: column; gap: 1.5rem;
+      }
+      .tiny { font-size: 11px; color: var(--faint); line-height: 1.5; max-width: 28rem; }
+      @media (min-width: 768px) {
+        nav { display: flex; }
+        .hero { grid-template-columns: 1.2fr 0.8fr; padding: 6rem 0; }
+        .stats { grid-template-columns: repeat(4, 1fr); }
+        .stat { border-bottom: 0; border-left: 1px solid var(--border); }
+        .stat:first-child { border-left: 0; }
+        .flow { grid-template-columns: repeat(3, 1fr); }
+        .blocks { grid-template-columns: 1fr 1fr; }
+        .split { grid-template-columns: 1fr 1fr; }
+        .split > div:first-child { border-right: 1px solid var(--border); }
+        .coach { grid-template-columns: 220px 1fr; }
+        .coach img { width: 13rem; }
+        .apply { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; }
+        .footer-row { flex-direction: row; justify-content: space-between; align-items: end; }
+        .frame { width: 18rem; }
+      }
+    </style>
+  </head>
+  <body id="topo">
+    <header>
+      <div class="header-row">
+        <a class="logo" href="#topo">SCHERER <span style="color:var(--accent)">METHOD</span></a>
+        <nav aria-label="Seções">
+          <a href="#metodo">Método</a>
+          <a href="#diagnostico">Diagnóstico</a>
+          <a href="#formulario">Começar</a>
+        </nav>
+        <a class="btn btn-primary btn-sm" href="#formulario">Diagnóstico</a>
+      </div>
+    </header>
+
+    <main>
+      <section class="rule">
+        <div class="wrap hero">
+          <div>
+            <p class="kicker">Scherer Method</p>
+            <h1 class="display">Pare de treinar<br />no <span style="color:var(--accent)">escuro.</span></h1>
+            <p class="lede">Diagnóstico de performance. Gargalo no papel. Um próximo passo. Sem enrolação.</p>
+            <div class="cta">
+              <a class="btn btn-primary btn-lg" href="#formulario">Quero meu diagnóstico →</a>
+              <a class="btn btn-ghost btn-lg" href="#diagnostico">Ver os eixos ↓</a>
+            </div>
+          </div>
+          <figure class="frame">
+            <img src="https://cdn.jsdelivr.net/gh/matheusscherer/mtsfit@main/public/photos/coach.jpg" alt="Matheus Scherer, coach do Scherer Method" />
+            <figcaption>
+              <p>Matheus Scherer</p>
+              <p style="color:var(--accent);margin-top:2px">Coach</p>
+            </figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="rule">
+        <div class="wrap stats">
+          <div class="stat"><strong>03</strong><span>Pilares analisados</span></div>
+          <div class="stat"><strong>20</strong><span>Minutos no diagnóstico</span></div>
+          <div class="stat"><strong>01</strong><span>Próximo passo</span></div>
+          <div class="stat"><strong>00</strong><span>Enrolação</span></div>
+        </div>
+      </section>
+
+      <section id="metodo" class="rule">
+        <div class="wrap section">
+          <p class="kicker">Como funciona</p>
+          <h2 class="display">Informação vira<br />direção.</h2>
+          <div class="flow">
+            <article class="card">
+              <p class="kicker">01</p>
+              <h3 class="display">Dados</h3>
+              <p>Rotina, treino, objetivo. Direto. Sem texto longo.</p>
+            </article>
+            <article class="card">
+              <p class="kicker">02</p>
+              <h3 class="display">Gargalo</h3>
+              <p>O que trava a evolução, destacado. Sem achismo.</p>
+            </article>
+            <article class="card">
+              <p class="kicker">03</p>
+              <h3 class="display">Direção</h3>
+              <p>Um próximo passo. Onde concentrar energia.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="diagnostico">
+        <div class="wrap section">
+          <p class="kicker">Diagnóstico</p>
+          <h2 class="display">Quatro eixos.<br />Dados, não foto.</h2>
+          <p class="lede">Nome, tempo, foco. O resto é direção.</p>
+          <div class="blocks">
+            <article class="block">
+              <div class="block-top"><span>01</span><span>8 MIN</span></div>
+              <h3 class="display">TREINO</h3>
+              <p class="detail">Volume · frequência · carga</p>
+              <dl class="meta"><dt>Foco</dt><dd>Progressão</dd><dt>Entrega</dt><dd>Trava</dd></dl>
+            </article>
+            <article class="block">
+              <div class="block-top"><span>02</span><span>5 MIN</span></div>
+              <h3 class="display">ROTINA</h3>
+              <p class="detail">Horários · consistência · vida real</p>
+              <dl class="meta"><dt>Foco</dt><dd>Aderência</dd><dt>Entrega</dt><dd>Fricção</dd></dl>
+            </article>
+            <article class="block">
+              <div class="block-top"><span>03</span><span>4 MIN</span></div>
+              <h3 class="display">RECUPERAÇÃO</h3>
+              <p class="detail">Sono · folga · stress</p>
+              <dl class="meta"><dt>Foco</dt><dd>Capacidade</dd><dt>Entrega</dt><dd>Custo</dd></dl>
+            </article>
+            <article class="block">
+              <div class="block-top"><span>04</span><span>3 MIN</span></div>
+              <h3 class="display">OBJETIVO</h3>
+              <p class="detail">12 semanas · prioridade única</p>
+              <dl class="meta"><dt>Foco</dt><dd>Direção</dd><dt>Entrega</dt><dd>Passo</dd></dl>
+            </article>
+          </div>
+          <div class="card" style="margin-top:0.75rem;padding:0">
+            <div style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:0.75rem;padding:1rem 1.25rem;border-bottom:1px solid var(--border)">
+              <div>
+                <p class="kicker" style="font-size:0.6875rem">O que volta</p>
+                <h3 class="display" style="font-size:1.85rem;margin:0.25rem 0 0">DIREÇÃO</h3>
+              </div>
+              <p style="max-width:20rem;font-size:0.75rem;color:var(--muted);margin:0">Clareza no papel. Não uma lista de 40 exercícios.</p>
+            </div>
+            <div style="overflow-x:auto">
+              <table>
+                <thead>
+                  <tr><th>Cód</th><th>Entrega</th><th>Para quê</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td style="font-family:var(--mono);font-size:0.75rem;color:var(--accent)">A1</td><td>Gargalo principal</td><td style="color:var(--muted)">O que está travando agora</td></tr>
+                  <tr><td style="font-family:var(--mono);font-size:0.75rem;color:var(--accent)">A2</td><td>Energia mal alocada</td><td style="color:var(--muted)">Onde você gasta à toa</td></tr>
+                  <tr><td style="font-family:var(--mono);font-size:0.75rem;color:var(--accent)">B1</td><td>Próximo passo</td><td style="color:var(--muted)">Uma ação, não uma lista</td></tr>
+                  <tr><td style="font-family:var(--mono);font-size:0.75rem;color:var(--accent)">B2</td><td>O que ignorar</td><td style="color:var(--muted)">Ruído fora do jogo</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="rule" style="border-top:1px solid var(--border)">
+        <div class="wrap split">
+          <div>
+            <p class="kicker">Para</p>
+            <ul class="list">
+              <li>Quem já treina e estagnou.</li>
+              <li>Quem quer direção, não motivação.</li>
+              <li>Quem trata o treino como trabalho.</li>
+            </ul>
+          </div>
+          <div>
+            <p class="kicker" style="color:var(--faint)">Fora</p>
+            <ul class="list">
+              <li style="color:var(--muted)">Quem busca treino aleatório.</li>
+              <li style="color:var(--muted)">Quem quer resultado sem rotina.</li>
+              <li style="color:var(--muted)">Quem quer conteúdo, não clareza.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section style="border-top:1px solid var(--border)">
+        <div class="wrap coach">
+          <img src="https://cdn.jsdelivr.net/gh/matheusscherer/mtsfit@main/public/photos/hero.jpg" alt="Matheus Scherer" />
+          <div>
+            <p class="kicker">Coach</p>
+            <h2 class="display">Matheus Scherer</h2>
+            <p style="font-family:var(--mono);font-size:0.75rem;letter-spacing:0.18em;color:var(--muted);margin:0.75rem 0 0">Porto Alegre · @mtscfit</p>
+            <p class="lede">O diagnóstico nasceu da rotina — não de um funil. Treino. Shape. Direção.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="formulario" style="border-top:1px solid var(--border)">
+        <div class="wrap section apply">
+          <div>
+            <p class="kicker">Começar</p>
+            <h2 class="display">Descubra o<br />próximo nível.</h2>
+            <p class="lede">Nome e e-mail. Sem sequência automática. Se fizer sentido, você recebe o próximo passo.</p>
+          </div>
+          <form id="lead-form" action="https://formsubmit.co/contatomatheusscherer@gmail.com" method="POST">
+            <input type="hidden" name="_captcha" value="false" />
+            <input type="hidden" name="_subject" value="MTSFIT — novo diagnóstico" />
+            <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" />
+            <label>
+              <span>Nome</span>
+              <input name="name" required minlength="2" autocomplete="name" placeholder="Seu nome" />
+            </label>
+            <label>
+              <span>E-mail</span>
+              <input name="email" type="email" required autocomplete="email" placeholder="seu@email.com" />
+            </label>
+            <label>
+              <span>Instagram</span>
+              <input name="instagram" autocomplete="off" placeholder="@usuario" />
+            </label>
+            <label>
+              <span>Objetivo</span>
+              <select name="goal" required>
+                <option value="" disabled selected>Selecione</option>
+                <option>Sair da estagnação</option>
+                <option>Hipertrofia</option>
+                <option>Composição corporal</option>
+                <option>Performance</option>
+              </select>
+            </label>
+            <button class="btn btn-primary btn-lg" type="submit">Quero começar</button>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="footer-row">
+        <div>
+          <p class="logo">SCHERER <span style="color:var(--accent)">METHOD</span></p>
+          <p style="margin:0.25rem 0 0;font-size:0.75rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted)">Porto Alegre · @mtscfit</p>
+        </div>
+        <div>
+          <a href="https://www.instagram.com/mtscfit/" target="_blank" rel="noreferrer" style="font-size:0.75rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--muted)">Instagram</a>
+          <p class="tiny">© 2026 Matheus Scherer. Conteúdo educacional. Não substitui orientação de profissional de saúde habilitado.</p>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
