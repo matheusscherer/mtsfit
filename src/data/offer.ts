@@ -8,7 +8,7 @@ export const offer = {
   priceFrom: 129,
   price: 19,
   ctaHero: "Quero o protocolo",
-  ctaPrice: "Garantir minha vaga",
+  ctaPrice: "Começar hoje",
   ctaFinal: "Começar hoje",
   kicker: "21 DIAS · SEM FILTRO",
   guarantee: "7 dias de garantia. Não gostou, devolvemos 100%.",
