@@ -151,9 +151,6 @@ function How() {
 function PriceBlock() {
   return (
     <section id="comprar" className="scroll-mt-20 border-b border-border py-8">
-      <p className="font-mono text-2xs tracking-[0.28em] text-accent">
-        DE R${offer.priceFrom} POR R${offer.price}
-      </p>
       <div className="mt-4 flex items-end gap-4">
         <p className="font-display text-2xl font-bold leading-none tracking-tight text-muted line-through">
           R${offer.priceFrom}
@@ -162,9 +159,6 @@ function PriceBlock() {
           R${offer.price}
         </p>
       </div>
-      <p className="mt-3 font-mono text-2xs uppercase tracking-[0.16em] text-muted">
-        acesso único · começa hoje
-      </p>
       <div className="mt-6">
         <Cta label={offer.ctaPrice} />
       </div>
@@ -184,9 +178,6 @@ function FinalCta() {
         <br />
         Paga o <span className="text-accent">dia a dia.</span>
       </h2>
-      <p className="mt-4 text-sm text-muted">
-        De R${offer.priceFrom} por R${offer.price}. 21 dias no protocolo.
-      </p>
       <div className="mt-6">
         <Cta label={offer.ctaFinal} />
       </div>
