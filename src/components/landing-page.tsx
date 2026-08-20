@@ -1,4 +1,4 @@
-import { ArrowRight, ShieldCheck } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { bullets, offer, steps } from "@/data/offer";
 
@@ -12,7 +12,6 @@ export function LandingPage() {
         <Proof />
         <Deliverables />
         <How />
-        <PriceBlock />
         <FinalCta />
       </main>
       <Footer />
@@ -144,28 +143,6 @@ function How() {
           </li>
         ))}
       </ol>
-    </section>
-  );
-}
-
-function PriceBlock() {
-  return (
-    <section id="comprar" className="scroll-mt-20 border-b border-border py-8">
-      <div className="mt-4 flex items-end gap-4">
-        <p className="font-display text-2xl font-bold leading-none tracking-tight text-muted line-through">
-          R${offer.priceFrom}
-        </p>
-        <p className="font-display text-5xl font-extrabold leading-none tracking-tight text-accent">
-          R${offer.price}
-        </p>
-      </div>
-      <div className="mt-6">
-        <Cta label={offer.ctaPrice} />
-      </div>
-      <p className="mt-4 flex items-center gap-2 text-xs text-muted">
-        <ShieldCheck className="size-4 shrink-0 text-accent" strokeWidth={2} />
-        {offer.guarantee}
-      </p>
     </section>
   );
 }
