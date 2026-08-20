@@ -2,13 +2,13 @@
 @import "tailwindcss";
 
 @theme {
-  --color-bg: #070707;
+  --color-bg: #0a0a0a;
   --color-surface: #111111;
   --color-surface-2: #171717;
   --color-fg: #f3f3ee;
-  --color-muted: #8c8c84;
+  --color-muted: #9a9a92;
   --color-faint: #5c5c56;
-  --color-accent: #ccff00;
+  --color-accent: #d5ff40;
   --color-accent-fg: #0a0a0a;
   --color-border: #242424;
   --color-border-strong: #3a3a3a;
@@ -24,19 +24,15 @@
   --text-lg: 1.125rem;
   --text-xl: 1.25rem;
   --text-2xl: 1.5rem;
-  --text-3xl: clamp(1.75rem, 1.2rem + 2vw, 2.25rem);
-  --text-4xl: clamp(2.25rem, 1.4rem + 3vw, 3.25rem);
-  --text-5xl: clamp(3rem, 1.6rem + 5vw, 4.5rem);
-  --text-hero: clamp(3.4rem, 6vw + 1.4rem, 7.4rem);
-  --text-block: clamp(2.6rem, 4vw + 1.2rem, 4.4rem);
+  --text-3xl: clamp(1.5rem, 1.1rem + 1.6vw, 2rem);
+  --text-4xl: clamp(2rem, 1.3rem + 2.4vw, 2.75rem);
+  --text-5xl: clamp(2.6rem, 1.5rem + 3.5vw, 3.5rem);
+  --text-hero: clamp(2.6rem, 1.4rem + 4.2vw, 3.75rem);
 
   --radius-xs: 2px;
   --radius-sm: 4px;
   --radius-md: 8px;
   --radius-lg: 12px;
-
-  --shadow-border: 0 0 0 1px #ffffff14;
-  --shadow-border-hover: 0 0 0 1px #ccff0066;
 
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
 }
@@ -75,10 +71,61 @@
   p {
     text-wrap: pretty;
   }
+}
 
-  img {
-    outline: 1px solid rgb(255 255 255 / 0.1);
-    outline-offset: -1px;
+@layer components {
+  .lime-blob {
+    pointer-events: none;
+    position: absolute;
+    left: 50%;
+    top: -8rem;
+    z-index: 0;
+    height: 28rem;
+    width: 28rem;
+    translate: -50% 0;
+    border-radius: 9999px;
+    background: radial-gradient(
+      circle,
+      rgb(213 255 64 / 0.16) 0%,
+      transparent 68%
+    );
+    filter: blur(40px);
+    animation: blob-drift 16s var(--ease-out) infinite alternate;
+  }
+
+  .enter {
+    opacity: 0;
+    transform: translateY(10px);
+    animation: fade-up 480ms var(--ease-out) forwards;
+  }
+
+  .enter-1 {
+    animation-delay: 40ms;
+  }
+  .enter-2 {
+    animation-delay: 80ms;
+  }
+  .enter-3 {
+    animation-delay: 140ms;
+  }
+  .enter-4 {
+    animation-delay: 200ms;
+  }
+}
+
+@keyframes blob-drift {
+  from {
+    transform: translate3d(-6%, 0, 0) scale(1);
+  }
+  to {
+    transform: translate3d(8%, 10%, 0) scale(1.08);
+  }
+}
+
+@keyframes fade-up {
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 

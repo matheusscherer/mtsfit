@@ -9,7 +9,7 @@ import { AuthProvider } from "@/lib/auth/provider";
 import { PreviewHostBridge } from "@/components/preview-host-bridge";
 import appCss from "../styles.css?url";
 
-const APP_NAME = "MTSFIT";
+const APP_NAME = "MTSFIT — Desafio 21 Dias";
 
 const fetchSessionUser = createServerFn({ method: "GET" }).handler(async () => {
   const { getSessionUser } = await import("@/lib/auth/verify.server");
@@ -23,13 +23,13 @@ export const Route = createRootRoute({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Scherer Method — Diagnóstico de Performance" },
+      { title: APP_NAME },
       {
         name: "description",
         content:
-          "Pare de treinar no escuro. Diagnóstico de performance: gargalo no papel, um próximo passo. Sem enrolação.",
+          "Por que teu treino não cresce. Protocolo de hipertrofia em 21 dias. R$19. Sem enrolação.",
       },
-      { name: "theme-color", content: "#070707" },
+      { name: "theme-color", content: "#0A0A0A" },
       { name: "author", content: "Matheus Scherer" },
     ],
     links: [
