@@ -27,7 +27,7 @@ export const Route = createRootRoute({
       {
         name: "description",
         content:
-          "Por que teu treino não cresce. Protocolo de hipertrofia em 21 dias. R$19. Sem enrolação.",
+          "6 mil veem o shape. Quase ninguém vê o que eu faço. 21 dias no meu protocolo. De R$129 por R$19.",
       },
       { name: "theme-color", content: "#0A0A0A" },
       { name: "author", content: "Matheus Scherer" },

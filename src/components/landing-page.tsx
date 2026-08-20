@@ -1,6 +1,6 @@
 import { ArrowRight, Check, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { bullets, faqs, offer } from "@/data/offer";
+import { bullets, offer } from "@/data/offer";
 
 export function LandingPage() {
   return (
@@ -12,7 +12,6 @@ export function LandingPage() {
         <Proof />
         <Deliverables />
         <PriceBlock />
-        <Faq />
         <FinalCta />
       </main>
       <Footer />
@@ -53,16 +52,17 @@ function Hero() {
   return (
     <section className="border-b border-border py-10 sm:py-12">
       <p className="enter enter-1 font-mono text-2xs tracking-[0.28em] text-accent">
-        DESAFIO 21 DIAS
+        {offer.kicker}
       </p>
       <h1 className="enter enter-2 mt-3 font-display text-hero font-extrabold uppercase leading-[0.88] tracking-tight">
-        Por que teu treino
+        6 mil veem o shape.
         <br />
-        não <span className="text-accent">cresce.</span>
+        Quase ninguém vê
+        <br />
+        o que <span className="text-accent">eu faço.</span>
       </h1>
       <p className="enter enter-3 mt-4 max-w-sm text-sm leading-relaxed text-muted">
-        Não é motivação. É protocolo. 21 dias de hipertrofia, já montado. Sem
-        enrolação.
+        21 dias no meu protocolo. Treino. Comida. Rotina. Sem filtro.
       </p>
       <div className="enter enter-4 mt-7">
         <Cta />
@@ -82,7 +82,7 @@ function Proof() {
       >
         <p className="font-display text-xl font-extrabold uppercase tracking-tight">
           {offer.followers}{" "}
-          <span className="text-muted">acompanham o método</span>
+          <span className="text-muted">no Instagram</span>
         </p>
         <span className="shrink-0 font-mono text-2xs tracking-[0.18em] text-accent">
           {offer.handle} →
@@ -96,23 +96,20 @@ function Deliverables() {
   return (
     <section className="border-b border-border py-8">
       <p className="font-mono text-2xs tracking-[0.28em] text-accent">
-        O QUE VOCÊ RECEBE
+        MEU PROTOCOLO
       </p>
-      <ul className="mt-5 space-y-4">
+      <ul className="mt-5 space-y-2">
         {bullets.map((item) => (
-          <li key={item.id} className="flex gap-4 border border-border bg-surface p-4">
+          <li key={item.id} className="flex items-center gap-4 border border-border bg-surface px-4 py-3">
             <span
-              className="mt-0.5 grid size-6 shrink-0 place-items-center bg-accent text-accent-fg"
+              className="grid size-6 shrink-0 place-items-center bg-accent text-accent-fg"
               aria-hidden="true"
             >
               <Check className="size-3.5" strokeWidth={3} />
             </span>
-            <div>
-              <p className="font-display text-lg font-extrabold uppercase tracking-tight">
-                {item.title}
-              </p>
-              <p className="mt-1 text-sm leading-relaxed text-muted">{item.body}</p>
-            </div>
+            <p className="font-display text-lg font-extrabold uppercase tracking-tight">
+              {item.title}
+            </p>
           </li>
         ))}
       </ul>
@@ -124,19 +121,19 @@ function PriceBlock() {
   return (
     <section id="comprar" className="scroll-mt-20 border-b border-border py-8">
       <p className="font-mono text-2xs tracking-[0.28em] text-accent">
-        PREÇO DE ENTRADA
+        POUCAS VAGAS
       </p>
-      <p className="mt-3 text-sm text-muted">
-        Consultoria custa centenas. O protocolo custa um lanche.
-      </p>
-      <div className="mt-5 flex items-end gap-3">
+      <div className="mt-5 flex items-end gap-4">
+        <p className="font-display text-2xl font-bold leading-none tracking-tight text-muted line-through">
+          R${offer.priceFrom}
+        </p>
         <p className="font-display text-5xl font-extrabold leading-none tracking-tight text-accent">
           R${offer.price}
         </p>
-        <p className="mb-1 font-mono text-2xs uppercase tracking-[0.16em] text-muted">
-          acesso único · sem mensalidade
-        </p>
       </div>
+      <p className="mt-3 font-mono text-2xs uppercase tracking-[0.16em] text-muted">
+        acesso único · vagas limitadas
+      </p>
       <div className="mt-6">
         <Cta />
       </div>
@@ -148,40 +145,17 @@ function PriceBlock() {
   );
 }
 
-function Faq() {
-  return (
-    <section className="border-b border-border py-8">
-      <p className="font-mono text-2xs tracking-[0.28em] text-accent">DÚVIDAS</p>
-      <div className="mt-5 divide-y divide-border border border-border">
-        {faqs.map((item) => (
-          <details key={item.q} className="group px-4 py-3">
-            <summary className="flex cursor-pointer list-none items-center justify-between gap-3 font-display text-lg font-bold uppercase tracking-tight [&::-webkit-details-marker]:hidden">
-              {item.q}
-              <span
-                className="font-mono text-accent transition-transform duration-150 group-open:rotate-45"
-                aria-hidden="true"
-              >
-                +
-              </span>
-            </summary>
-            <p className="mt-2 pb-1 text-sm leading-relaxed text-muted">{item.a}</p>
-          </details>
-        ))}
-      </div>
-    </section>
-  );
-}
-
 function FinalCta() {
   return (
     <section className="py-10">
       <h2 className="font-display text-4xl font-extrabold uppercase leading-[0.9] tracking-tight">
-        21 dias.
+        Quer o shape?
         <br />
-        R${offer.price}.
-        <br />
-        Sem enrolação.
+        Paga o <span className="text-accent">dia a dia.</span>
       </h2>
+      <p className="mt-4 text-sm text-muted">
+        De R${offer.priceFrom} por R${offer.price}. Poucas vagas.
+      </p>
       <div className="mt-6">
         <Cta />
       </div>
