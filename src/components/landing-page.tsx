@@ -1,4 +1,4 @@
-import { ArrowRight, Check, ShieldCheck } from "lucide-react";
+import { ArrowRight, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { bullets, offer } from "@/data/offer";
 
@@ -40,7 +40,7 @@ function Header() {
             {offer.handle}
           </a>
           <Button asChild size="sm">
-            <a href={offer.checkoutUrl}>{offer.cta}</a>
+            <a href={offer.checkoutUrl}>{offer.ctaFinal}</a>
           </Button>
         </div>
       </div>
@@ -50,7 +50,7 @@ function Header() {
 
 function Hero() {
   return (
-    <section className="border-b border-border py-10 sm:py-12">
+    <section className="border-b border-border py-8 sm:py-10">
       <p className="enter enter-1 font-mono text-2xs tracking-[0.28em] text-accent">
         {offer.kicker}
       </p>
@@ -64,8 +64,8 @@ function Hero() {
       <p className="enter enter-3 mt-4 max-w-sm text-sm leading-relaxed text-muted">
         21 dias no meu protocolo. Treino. Comida. Rotina. Sem filtro.
       </p>
-      <div className="enter enter-4 mt-7">
-        <Cta />
+      <div className="enter enter-4 mt-6">
+        <Cta label={offer.ctaHero} />
       </div>
     </section>
   );
@@ -74,15 +74,20 @@ function Hero() {
 function Proof() {
   return (
     <section className="border-b border-border py-6">
+      <p className="font-mono text-2xs tracking-[0.28em] text-accent">A PROVA</p>
+      <p className="mt-3 font-display text-2xl font-extrabold uppercase leading-[0.95] tracking-tight">
+        O protocolo é o que eu sigo.
+        <br />
+        O shape é a prova.
+      </p>
       <a
         href={offer.instagramUrl}
         target="_blank"
         rel="noreferrer"
-        className="flex items-center justify-between gap-3 transition-colors hover:text-accent"
+        className="mt-4 flex items-center justify-between gap-3 transition-colors hover:text-accent"
       >
-        <p className="font-display text-xl font-extrabold uppercase tracking-tight">
-          {offer.followers}{" "}
-          <span className="text-muted">no Instagram</span>
+        <p className="text-sm text-muted">
+          {offer.followers} no Instagram. Abre e confere.
         </p>
         <span className="shrink-0 font-mono text-2xs tracking-[0.18em] text-accent">
           {offer.handle} →
@@ -96,20 +101,20 @@ function Deliverables() {
   return (
     <section className="border-b border-border py-8">
       <p className="font-mono text-2xs tracking-[0.28em] text-accent">
-        MEU PROTOCOLO
+        O QUE VOCÊ RECEBE
       </p>
-      <ul className="mt-5 space-y-2">
+      <ul className="mt-4 divide-y divide-border border border-border bg-surface">
         {bullets.map((item) => (
-          <li key={item.id} className="flex items-center gap-4 border border-border bg-surface px-4 py-3">
-            <span
-              className="grid size-6 shrink-0 place-items-center bg-accent text-accent-fg"
-              aria-hidden="true"
-            >
-              <Check className="size-3.5" strokeWidth={3} />
+          <li key={item.id} className="flex items-start gap-4 px-4 py-3.5">
+            <span className="mt-0.5 font-mono text-2xs tracking-[0.18em] text-accent">
+              {item.id}
             </span>
-            <p className="font-display text-lg font-extrabold uppercase tracking-tight">
-              {item.title}
-            </p>
+            <div>
+              <p className="font-display text-lg font-extrabold uppercase tracking-tight">
+                {item.title}
+              </p>
+              <p className="mt-0.5 text-sm text-muted">{item.body}</p>
+            </div>
           </li>
         ))}
       </ul>
@@ -121,9 +126,9 @@ function PriceBlock() {
   return (
     <section id="comprar" className="scroll-mt-20 border-b border-border py-8">
       <p className="font-mono text-2xs tracking-[0.28em] text-accent">
-        POUCAS VAGAS
+        DE R${offer.priceFrom} POR R${offer.price}
       </p>
-      <div className="mt-5 flex items-end gap-4">
+      <div className="mt-4 flex items-end gap-4">
         <p className="font-display text-2xl font-bold leading-none tracking-tight text-muted line-through">
           R${offer.priceFrom}
         </p>
@@ -132,10 +137,10 @@ function PriceBlock() {
         </p>
       </div>
       <p className="mt-3 font-mono text-2xs uppercase tracking-[0.16em] text-muted">
-        acesso único · vagas limitadas
+        acesso único · começa hoje
       </p>
       <div className="mt-6">
-        <Cta />
+        <Cta label={offer.ctaPrice} />
       </div>
       <p className="mt-4 flex items-center gap-2 text-xs text-muted">
         <ShieldCheck className="size-4 shrink-0 text-accent" strokeWidth={2} />
@@ -154,10 +159,10 @@ function FinalCta() {
         Paga o <span className="text-accent">dia a dia.</span>
       </h2>
       <p className="mt-4 text-sm text-muted">
-        De R${offer.priceFrom} por R${offer.price}. Poucas vagas.
+        De R${offer.priceFrom} por R${offer.price}. 21 dias no protocolo.
       </p>
       <div className="mt-6">
-        <Cta />
+        <Cta label={offer.ctaFinal} />
       </div>
     </section>
   );
@@ -193,7 +198,7 @@ function StickyCta() {
     <div className="fixed inset-x-0 bottom-0 z-40 border-t border-border bg-bg/95 p-3 backdrop-blur-md md:hidden">
       <Button asChild size="xl" className="w-full">
         <a href={offer.checkoutUrl}>
-          {offer.cta}
+          {offer.ctaPrice}
           <span className="font-mono text-xs tracking-normal">R${offer.price}</span>
         </a>
       </Button>
@@ -201,11 +206,11 @@ function StickyCta() {
   );
 }
 
-function Cta() {
+function Cta({ label }: { label: string }) {
   return (
     <Button asChild size="xl">
       <a href={offer.checkoutUrl}>
-        {offer.cta}
+        {label}
         <ArrowRight className="size-4" strokeWidth={2.4} />
       </a>
     </Button>

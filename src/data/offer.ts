@@ -7,13 +7,27 @@ export const offer = {
   followers: "6.000+",
   priceFrom: 129,
   price: 19,
-  cta: "Começar hoje",
-  kicker: "POUCAS VAGAS · 21 DIAS",
-  guarantee: "7 dias de garantia. Não fez sentido, reembolso.",
+  ctaHero: "Quero o protocolo",
+  ctaPrice: "Garantir minha vaga",
+  ctaFinal: "Começar hoje",
+  kicker: "21 DIAS · SEM FILTRO",
+  guarantee: "7 dias de garantia. Não gostou, devolvemos 100%.",
 } as const;
 
 export const bullets = [
-  { id: "01", title: "O treino do dia." },
-  { id: "02", title: "O que eu como." },
-  { id: "03", title: "A rotina. Sem filtro." },
+  {
+    id: "01",
+    title: "Treino do dia",
+    body: "No app. O mesmo que eu faço.",
+  },
+  {
+    id: "02",
+    title: "Dieta do dia",
+    body: "O que eu como. Sem cardápio genérico.",
+  },
+  {
+    id: "03",
+    title: "Rotina",
+    body: "O dia a dia. Sem filtro.",
+  },
 ] as const;

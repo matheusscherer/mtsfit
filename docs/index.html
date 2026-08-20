@@ -109,19 +109,17 @@
       .proof strong { font-family: var(--display); font-size: 1.25rem; font-weight: 800; text-transform: uppercase; }
       .proof span { color: var(--muted); }
       .item {
-        display: flex; gap: 1rem; border: 1px solid var(--border);
-        background: var(--surface); padding: 1rem; margin-top: 1rem;
+        display: flex; gap: 1rem; padding: 0.875rem 1rem;
+        border-bottom: 1px solid var(--border);
       }
-      .check {
-        margin-top: 0.125rem; width: 1.5rem; height: 1.5rem; flex-shrink: 0;
-        display: grid; place-items: center; background: var(--accent); color: var(--accent-fg);
-        font-weight: 800; font-size: 0.75rem;
-      }
+      .list { border: 1px solid var(--border); background: var(--surface); margin-top: 1rem; }
+      .list .item:last-child { border-bottom: 0; }
+      .num { font-family: var(--mono); font-size: 0.6875rem; letter-spacing: 0.18em; color: var(--accent); margin-top: 0.2rem; flex-shrink: 0; }
       .item h3 {
         margin: 0; font-family: var(--display); font-size: 1.125rem;
         font-weight: 800; text-transform: uppercase; letter-spacing: -0.02em;
       }
-      .item p { margin: 0.25rem 0 0; color: var(--muted); font-size: 0.875rem; }
+      .item p { margin: 0.15rem 0 0; color: var(--muted); font-size: 0.875rem; }
       .price { font-family: var(--display); font-size: 3.5rem; font-weight: 800; line-height: 1; color: var(--accent); margin: 0; }
       .price-from { font-family: var(--display); font-size: 1.5rem; font-weight: 700; line-height: 1; color: var(--muted); text-decoration: line-through; margin: 0; }
       .row { display: flex; align-items: flex-end; gap: 0.75rem; margin-top: 1.25rem; }
@@ -173,48 +171,62 @@
       </header>
       <main class="col" id="topo">
         <section>
-          <p class="kicker">POUCAS VAGAS · 21 DIAS</p>
+          <p class="kicker">21 DIAS · SEM FILTRO</p>
           <h1>6 mil veem o shape.<br />Quase ninguém vê<br />o que <span class="lime">eu faço.</span></h1>
           <p class="sub">21 dias no meu protocolo. Treino. Comida. Rotina. Sem filtro.</p>
           <div class="hero-cta">
-            <a class="cta xl" href="https://pay.kiwify.com.br/pqCtqP1">Começar hoje →</a>
+            <a class="cta xl" href="https://pay.kiwify.com.br/pqCtqP1">Quero o protocolo →</a>
           </div>
         </section>
         <section class="tight">
-          <a class="proof" href="https://www.instagram.com/mtscfit/" target="_blank" rel="noreferrer">
-            <strong>6.000+ <span>no Instagram</span></strong>
+          <p class="kicker">A PROVA</p>
+          <h2 style="font-size:1.5rem">O protocolo é o que eu sigo.<br />O shape é a prova.</h2>
+          <a class="proof" href="https://www.instagram.com/mtscfit/" target="_blank" rel="noreferrer" style="margin-top:1rem">
+            <span>6.000+ no Instagram. Abre e confere.</span>
             <span class="kicker">@mtscfit →</span>
           </a>
         </section>
         <section>
-          <p class="kicker">MEU PROTOCOLO</p>
-          <div class="item">
-            <span class="check">✓</span>
-            <h3>O treino do dia.</h3>
-          </div>
-          <div class="item">
-            <span class="check">✓</span>
-            <h3>O que eu como.</h3>
-          </div>
-          <div class="item">
-            <span class="check">✓</span>
-            <h3>A rotina. Sem filtro.</h3>
+          <p class="kicker">O QUE VOCÊ RECEBE</p>
+          <div class="list">
+            <div class="item">
+              <span class="num">01</span>
+              <div>
+                <h3>Treino do dia</h3>
+                <p>No app. O mesmo que eu faço.</p>
+              </div>
+            </div>
+            <div class="item">
+              <span class="num">02</span>
+              <div>
+                <h3>Dieta do dia</h3>
+                <p>O que eu como. Sem cardápio genérico.</p>
+              </div>
+            </div>
+            <div class="item">
+              <span class="num">03</span>
+              <div>
+                <h3>Rotina</h3>
+                <p>O dia a dia. Sem filtro.</p>
+              </div>
+            </div>
           </div>
         </section>
         <section id="comprar">
-          <p class="kicker">POUCAS VAGAS</p>
+          <p class="kicker">DE R$129 POR R$19</p>
           <div class="row">
             <p class="price-from">R$129</p>
             <p class="price">R$19</p>
           </div>
-          <p class="meta" style="margin-top:0.75rem">acesso único · vagas limitadas</p>
+          <p class="meta" style="margin-top:0.75rem">acesso único · começa hoje</p>
           <div class="hero-cta">
-            <a class="cta xl" href="https://pay.kiwify.com.br/pqCtqP1">Começar hoje →</a>
+            <a class="cta xl" href="https://pay.kiwify.com.br/pqCtqP1">Garantir minha vaga →</a>
           </div>
-          <p class="guarantee">7 dias de garantia. Não fez sentido, reembolso.</p>
+          <p class="guarantee">7 dias de garantia. Não gostou, devolvemos 100%.</p>
         </section>
         <section style="border-bottom:0">
           <h2>Quer o shape?<br />Paga o <span class="lime">dia a dia.</span></h2>
+          <p class="sub">De R$129 por R$19. 21 dias no protocolo.</p>
           <div class="hero-cta">
             <a class="cta xl" href="https://pay.kiwify.com.br/pqCtqP1">Começar hoje →</a>
           </div>
@@ -228,7 +240,7 @@
         </div>
       </footer>
       <div class="sticky">
-        <a class="cta xl" href="https://pay.kiwify.com.br/pqCtqP1">Começar hoje · R$19</a>
+        <a class="cta xl" href="https://pay.kiwify.com.br/pqCtqP1">Garantir minha vaga · R$19</a>
       </div>
     </div>
   </body>
