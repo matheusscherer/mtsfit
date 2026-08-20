@@ -1,4 +1,3 @@
-import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { bullets, offer, steps } from "@/data/offer";
 
@@ -40,7 +39,7 @@ function Header() {
             {offer.handle}
           </a>
           <Button asChild size="sm">
-            <a href={offer.checkoutUrl}>{offer.ctaFinal}</a>
+            <a href={offer.checkoutUrl}>R${offer.price}</a>
           </Button>
         </div>
       </div>
@@ -62,10 +61,12 @@ function Hero() {
         o que <span className="text-accent">eu faço.</span>
       </h1>
       <p className="enter enter-3 mt-4 max-w-sm text-sm leading-relaxed text-muted">
-        21 dias no meu protocolo. Treino. Comida. Rotina. Sem filtro.
+        21 dias no meu protocolo. Treino. Comida. Rotina. De R${offer.priceFrom}{" "}
+        por R${offer.price}.
       </p>
       <div className="enter enter-4 mt-6">
         <Cta label={offer.ctaHero} />
+        <p className="mt-3 text-xs text-muted">{offer.guarantee}</p>
       </div>
     </section>
   );
@@ -157,6 +158,9 @@ function FinalCta() {
       </h2>
       <div className="mt-6">
         <Cta label={offer.ctaFinal} />
+        <p className="mt-3 text-xs text-muted">
+          De R${offer.priceFrom} por R${offer.price}.
+        </p>
       </div>
     </section>
   );
@@ -205,7 +209,7 @@ function Cta({ label }: { label: string }) {
     <Button asChild size="xl">
       <a href={offer.checkoutUrl}>
         {label}
-        <ArrowRight className="size-4" strokeWidth={2.4} />
+        <span className="font-mono text-xs tracking-normal">R${offer.price}</span>
       </a>
     </Button>
   );

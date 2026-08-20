@@ -10,7 +10,7 @@ export const offer = {
   ctaHero: "Quero o protocolo",
   ctaPrice: "Começar hoje",
   ctaFinal: "Começar hoje",
-  kicker: "21 DIAS · SEM FILTRO",
+  kicker: "21 DIAS · R$19",
   guarantee: "7 dias de garantia. Não gostou, devolvemos 100%.",
 } as const;
 
