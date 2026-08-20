@@ -15,9 +15,21 @@ export const offer = {
 } as const;
 
 export const bullets = [
-  { id: "treino", title: "Treino do dia.", body: "Sem enrolação." },
-  { id: "comida", title: "O que eu como.", body: "Sem dieta genérica." },
-  { id: "progresso", title: "Seu progresso.", body: "Sem planilha." },
+  {
+    id: "01",
+    title: "Treino do dia",
+    body: "O mesmo que eu faço. Abre e treina.",
+  },
+  {
+    id: "02",
+    title: "O que eu como",
+    body: "Hábitos do dia. Sem cardápio genérico.",
+  },
+  {
+    id: "03",
+    title: "Dia X/21",
+    body: "Progresso na tela. Sem planilha.",
+  },
 ] as const;
 
 export const steps = [

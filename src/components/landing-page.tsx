@@ -1,11 +1,10 @@
 import { Button } from "@/components/ui/button";
-import { DayMark } from "@/components/day-mark";
-import { Reveal } from "@/components/reveal";
 import { bullets, offer, steps } from "@/data/offer";
 
 export function LandingPage() {
   return (
     <div id="topo" className="relative min-h-svh overflow-x-hidden bg-bg pb-24 md:pb-0">
+      <div className="lime-blob" aria-hidden="true" />
       <Header />
       <main className="relative mx-auto max-w-xl px-5">
         <Hero />
@@ -26,7 +25,7 @@ function Header() {
       <div className="mx-auto flex h-14 max-w-xl items-center justify-between px-5">
         <a
           href="#topo"
-          className="text-sm font-semibold tracking-[0.22em] uppercase"
+          className="font-display text-lg font-extrabold tracking-[0.1em]"
         >
           MTS<span className="text-accent">FIT</span>
         </a>
@@ -50,23 +49,24 @@ function Header() {
 
 function Hero() {
   return (
-    <section className="border-b border-border py-9">
-      <h1 className="hero-in font-display text-hero font-black leading-[0.92] tracking-tight">
+    <section className="border-b border-border py-8 sm:py-10">
+      <p className="enter enter-1 font-mono text-2xs tracking-[0.28em] text-accent">
+        {offer.kicker}
+      </p>
+      <h1 className="enter enter-2 mt-3 font-display text-hero font-extrabold uppercase leading-[0.88] tracking-tight">
         6 mil veem o shape.
         <br />
         Quase ninguém vê
         <br />
         o que <span className="text-accent">eu faço.</span>
       </h1>
-      <div className="hero-in hero-in-2">
-        <p className="mt-5 max-w-[18rem] text-sm leading-relaxed text-muted">
-          21 dias no meu protocolo. Treino. Comida. Rotina. De R$
-          {offer.priceFrom} por R${offer.price}.
-        </p>
-        <div className="mt-6">
-          <Cta label={offer.ctaHero} />
-          <p className="mt-3 text-xs text-muted">{offer.guarantee}</p>
-        </div>
+      <p className="enter enter-3 mt-4 max-w-sm text-sm leading-relaxed text-muted">
+        21 dias no meu protocolo. Treino. Comida. Rotina. De R${offer.priceFrom}{" "}
+        por R${offer.price}.
+      </p>
+      <div className="enter enter-4 mt-6">
+        <Cta label={offer.ctaHero} />
+        <p className="mt-3 text-xs text-muted">{offer.guarantee}</p>
       </div>
     </section>
   );
@@ -74,9 +74,9 @@ function Hero() {
 
 function Proof() {
   return (
-    <Reveal className="border-b border-border py-9">
-      <p className="font-mono text-2xs tracking-[0.28em] text-muted">A PROVA</p>
-      <p className="mt-3 font-display text-4xl font-extrabold leading-[0.95] tracking-tight">
+    <section className="border-b border-border py-6">
+      <p className="font-mono text-2xs tracking-[0.28em] text-accent">A PROVA</p>
+      <p className="mt-3 font-display text-2xl font-extrabold uppercase leading-[0.95] tracking-tight">
         O protocolo é o que eu sigo.
         <br />
         O shape é a prova.
@@ -85,71 +85,76 @@ function Proof() {
         href={offer.instagramUrl}
         target="_blank"
         rel="noreferrer"
-        className="mt-5 flex items-center justify-between gap-3 text-sm text-muted transition-colors hover:text-fg"
+        className="mt-4 flex items-center justify-between gap-3 transition-colors hover:text-accent"
       >
-        <span>
+        <p className="text-sm text-muted">
           {offer.followers} no Instagram. Abre e confere.
-        </span>
+        </p>
         <span className="shrink-0 font-mono text-2xs tracking-[0.18em] text-accent">
           {offer.handle} →
         </span>
       </a>
-    </Reveal>
+    </section>
   );
 }
 
 function Deliverables() {
   return (
-    <Reveal className="border-b border-border py-9">
-      <p className="font-mono text-2xs tracking-[0.28em] text-muted">
+    <section className="border-b border-border py-8">
+      <p className="font-mono text-2xs tracking-[0.28em] text-accent">
         O QUE VOCÊ RECEBE
       </p>
-      <div className="mt-6">
-        <DayMark />
-      </div>
-      <ul className="mt-8 space-y-5">
+      <ul className="mt-4 divide-y divide-border border border-border bg-surface">
         {bullets.map((item) => (
-          <li key={item.id} className="border-l-2 border-accent pl-4">
-            <p className="font-display text-2xl font-extrabold leading-tight tracking-tight">
-              {item.title}
-            </p>
-            <p className="mt-1 text-sm text-muted">{item.body}</p>
+          <li key={item.id} className="flex items-start gap-4 px-4 py-3.5">
+            <span className="mt-0.5 font-mono text-2xs tracking-[0.18em] text-accent">
+              {item.id}
+            </span>
+            <div>
+              <p className="font-display text-lg font-extrabold uppercase tracking-tight">
+                {item.title}
+              </p>
+              <p className="mt-0.5 text-sm text-muted">{item.body}</p>
+            </div>
           </li>
         ))}
       </ul>
-    </Reveal>
+    </section>
   );
 }
 
 function How() {
   return (
-    <Reveal className="border-b border-border py-9">
-      <p className="font-mono text-2xs tracking-[0.28em] text-muted">
+    <section className="border-b border-border py-8">
+      <p className="font-mono text-2xs tracking-[0.28em] text-accent">
         COMO ENTRA
       </p>
-      <ol className="mt-5 grid grid-cols-3 gap-2">
+      <ol className="mt-4 grid grid-cols-3 gap-2">
         {steps.map((step) => (
-          <li key={step.id} className="border border-border bg-surface px-3 py-3">
-            <p className="font-mono text-2xs tracking-[0.18em] text-muted">
+          <li
+            key={step.id}
+            className="border border-border bg-surface px-3 py-3"
+          >
+            <p className="font-mono text-2xs tracking-[0.18em] text-accent">
               {step.id}
             </p>
-            <p className="mt-2 font-display text-lg font-extrabold leading-tight tracking-tight">
+            <p className="mt-2 font-display text-base font-extrabold uppercase leading-tight tracking-tight">
               {step.title}
             </p>
           </li>
         ))}
       </ol>
-    </Reveal>
+    </section>
   );
 }
 
 function FinalCta() {
   return (
-    <Reveal className="py-10">
-      <h2 className="font-display text-4xl font-extrabold leading-[0.95] tracking-tight">
+    <section className="py-10">
+      <h2 className="font-display text-4xl font-extrabold uppercase leading-[0.9] tracking-tight">
         Quer o shape?
         <br />
-        Paga o <span className="text-heat">dia a dia.</span>
+        Paga o <span className="text-accent">dia a dia.</span>
       </h2>
       <div className="mt-6">
         <Cta label={offer.ctaFinal} />
@@ -157,7 +162,7 @@ function FinalCta() {
           De R${offer.priceFrom} por R${offer.price}.
         </p>
       </div>
-    </Reveal>
+    </section>
   );
 }
 
@@ -165,7 +170,7 @@ function Footer() {
   return (
     <footer className="relative border-t border-border">
       <div className="mx-auto flex max-w-xl flex-col gap-3 px-5 py-8">
-        <p className="text-sm font-semibold tracking-[0.22em] uppercase">
+        <p className="font-display text-sm font-extrabold tracking-[0.1em]">
           MTS<span className="text-accent">FIT</span>
         </p>
         <a
