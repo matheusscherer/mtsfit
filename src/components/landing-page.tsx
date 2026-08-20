@@ -1,6 +1,6 @@
 import { ArrowRight, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { bullets, offer } from "@/data/offer";
+import { bullets, offer, steps } from "@/data/offer";
 
 export function LandingPage() {
   return (
@@ -11,6 +11,7 @@ export function LandingPage() {
         <Hero />
         <Proof />
         <Deliverables />
+        <How />
         <PriceBlock />
         <FinalCta />
       </main>
@@ -118,6 +119,31 @@ function Deliverables() {
           </li>
         ))}
       </ul>
+    </section>
+  );
+}
+
+function How() {
+  return (
+    <section className="border-b border-border py-8">
+      <p className="font-mono text-2xs tracking-[0.28em] text-accent">
+        COMO ENTRA
+      </p>
+      <ol className="mt-4 grid grid-cols-3 gap-2">
+        {steps.map((step) => (
+          <li
+            key={step.id}
+            className="border border-border bg-surface px-3 py-3"
+          >
+            <p className="font-mono text-2xs tracking-[0.18em] text-accent">
+              {step.id}
+            </p>
+            <p className="mt-2 font-display text-base font-extrabold uppercase leading-tight tracking-tight">
+              {step.title}
+            </p>
+          </li>
+        ))}
+      </ol>
     </section>
   );
 }

@@ -114,6 +114,9 @@
       }
       .list { border: 1px solid var(--border); background: var(--surface); margin-top: 1rem; }
       .list .item:last-child { border-bottom: 0; }
+      .steps { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.5rem; margin-top: 1rem; }
+      .step { border: 1px solid var(--border); background: var(--surface); padding: 0.75rem; }
+      .step h3 { margin: 0.5rem 0 0; font-family: var(--display); font-size: 1rem; font-weight: 800; text-transform: uppercase; line-height: 1.15; }
       .num { font-family: var(--mono); font-size: 0.6875rem; letter-spacing: 0.18em; color: var(--accent); margin-top: 0.2rem; flex-shrink: 0; }
       .item h3 {
         margin: 0; font-family: var(--display); font-size: 1.125rem;
@@ -193,23 +196,31 @@
               <span class="num">01</span>
               <div>
                 <h3>Treino do dia</h3>
-                <p>No app. O mesmo que eu faço.</p>
+                <p>O mesmo que eu faço. Abre e treina.</p>
               </div>
             </div>
             <div class="item">
               <span class="num">02</span>
               <div>
-                <h3>Dieta do dia</h3>
-                <p>O que eu como. Sem cardápio genérico.</p>
+                <h3>O que eu como</h3>
+                <p>Hábitos do dia. Sem cardápio genérico.</p>
               </div>
             </div>
             <div class="item">
               <span class="num">03</span>
               <div>
-                <h3>Rotina</h3>
-                <p>O dia a dia. Sem filtro.</p>
+                <h3>Dia X/21</h3>
+                <p>Progresso na tela. Sem planilha.</p>
               </div>
             </div>
+          </div>
+        </section>
+        <section>
+          <p class="kicker">COMO ENTRA</p>
+          <div class="steps">
+            <div class="step"><span class="num">1</span><h3>Paga</h3></div>
+            <div class="step"><span class="num">2</span><h3>E-mail da compra</h3></div>
+            <div class="step"><span class="num">3</span><h3>Treino do dia na tela</h3></div>
           </div>
         </section>
         <section id="comprar">

@@ -18,16 +18,22 @@ export const bullets = [
   {
     id: "01",
     title: "Treino do dia",
-    body: "No app. O mesmo que eu faço.",
+    body: "O mesmo que eu faço. Abre e treina.",
   },
   {
     id: "02",
-    title: "Dieta do dia",
-    body: "O que eu como. Sem cardápio genérico.",
+    title: "O que eu como",
+    body: "Hábitos do dia. Sem cardápio genérico.",
   },
   {
     id: "03",
-    title: "Rotina",
-    body: "O dia a dia. Sem filtro.",
+    title: "Dia X/21",
+    body: "Progresso na tela. Sem planilha.",
   },
+] as const;
+
+export const steps = [
+  { id: "1", title: "Paga" },
+  { id: "2", title: "E-mail da compra" },
+  { id: "3", title: "Treino do dia na tela" },
 ] as const;
