@@ -1,7 +1,7 @@
 export const offer = {
   brand: "MTSFIT",
   product: "Desafio 21 Dias",
-  checkoutUrl: "https://pay.kiwify.com.br/pqCtqP1",
+  checkoutUrl: "https://pay.kiwify.com.br/pqCtqP1?region=br",
   instagramUrl: "https://www.instagram.com/mtscfit/",
   handle: "@mtscfit",
   followers: "6.000+",
